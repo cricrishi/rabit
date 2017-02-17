@@ -3,6 +3,8 @@ package service
 import (
 	"fmt"
 	"gopkg.in/gin-gonic/gin.v1"
+	conf "github.com/rabit/config"
+	
 )
 
 type loginDetail struct {
@@ -15,6 +17,7 @@ func ListUsers(c *gin.Context) {
 		"status":  "posted",
 		"message": "my message",
 		"nick":    "test",
+		"url":     conf.ConfigData["config"].Get("Test_Url"),
 	})
 
 }
