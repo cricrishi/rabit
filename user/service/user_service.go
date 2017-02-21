@@ -2,9 +2,8 @@ package service
 
 import (
 	"fmt"
+	db "github.com/rabit/database"
 	"gopkg.in/gin-gonic/gin.v1"
-	conf "github.com/rabit/config"
-	
 )
 
 type loginDetail struct {
@@ -13,11 +12,13 @@ type loginDetail struct {
 }
 
 func ListUsers(c *gin.Context) {
+	err,users := db.GetUserDetail()
 	c.JSON(200, gin.H{
-		"status":  "posted",
-		"message": "my message",
+		"status":  "Listed",
+		"message": "This Api list the users from user table",
 		"nick":    "test",
-		"url":     conf.ConfigData["config"].Get("Test_Url"),
+		"error": err,
+		"users":    users,
 	})
 
 }
