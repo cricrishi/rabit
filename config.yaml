@@ -5,4 +5,10 @@ mysql:
   host: "127.0.0.1"
   port: 3306
 
+redis:
+  username: ""
+  password: ""
+  host: "127.0.0.1"
+  port: "6379"   
+
 Test_Url:  "www.google.com"

@@ -1,18 +1,15 @@
 package service
 
 import (
-	"fmt"
-	db "github.com/rabit/database"
 	"gopkg.in/gin-gonic/gin.v1"
+	userHelper "github.com/rabit/user/helper"
+	userModel "github.com/rabit/user/models"
 )
 
-type loginDetail struct {
-	Email    string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
+
 
 func ListUsers(c *gin.Context) {
-	err,users := db.GetUserDetail()
+	err,users := userHelper.ListUsers()
 	c.JSON(200, gin.H{
 		"status":  "Listed",
 		"message": "This Api list the users from user table",
@@ -24,12 +21,13 @@ func ListUsers(c *gin.Context) {
 }
 
 func AuthenticateUser(c *gin.Context) {
-	var requestData loginDetail
+	var requestData userModel.LoginDetail
 	c.BindJSON(&requestData)
-	fmt.Println(requestData)
+	r := userHelper.AuthenticateUser(requestData)
 	c.JSON(200, gin.H{
-		"email":    requestData.Email,
-		"password": requestData.Password,
+		"status":    r.Status,
+		"error": r.Error,
+		"uuid": r.UniqueKey,
 	})
 
 }

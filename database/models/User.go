@@ -8,3 +8,13 @@ type User struct {
 	Email     string
 	Task      string
 }
+
+
+type Users struct {
+	UserName string
+	FirstName string
+	LastName string
+	Email string
+	Password string
+	
+}
